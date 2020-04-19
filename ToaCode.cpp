@@ -102,27 +102,46 @@ public:
     void Parse(){
         if(input!=""){
             S(input);
+            V.push_back("S");
             if(DebugOut){
                 cout<<"S"<<endl; //debug
             }
         }
     }
 
-    void Print(){
-        if(V.empty()){
-            cout<<"Incorrect Structure"<<endl;
-            return;
-        }
-        string t;
-        int n=0;
+    void Force(){
+        V.push_back("Noun");
+        V.push_back("Noun Nominal");
+        V.push_back("Det Nominal");
+        V.push_back("Verb NP");
+        V.push_back("Pronoun");
+        V.push_back("NP VP");
         V.push_back("S");
+    }
+
+    void Vout(){
         cout<<"Vector Contains: "<<endl;
         for(int i=0;i<V.size();i++){
             cout<<V.at(i)<<endl;
         }
         cout<<endl;
+    }
+
+    void VInsert(string t){
+        if(t=="Det Nominal" || t=="Noun Nominal" || t=="ProperNoun" || t=="Preposition NP" || t=="Verb NP" || t=="Verb PP" || t=="Verb NP PP"){
+            //insert
+        }
+    }
+    void Print(){
+        if(V.empty()){
+            cout<<"Incorrect Structure"<<endl;
+            return;
+        }
+        string t,s;
+        int n=0;
         while(!V.empty()){
             t=V.back();
+            s=t+" "+s;
             V.pop_back();
             if(t=="S" || t=="NP" || t=="VP" || t=="PP" || t=="Nominal" || t=="NP VP"){
                 for(int i=0,nt=0;nt!=n;i++){
@@ -131,7 +150,7 @@ public:
                     }
                     cout<<input[i];
                 }
-                cout<<t<<endl;
+                cout<<s<<endl;
             }
             if(t=="Preposition" || t=="Noun" || t=="Verb" || t=="Det" || t=="Pronoun"){
                 for(int i=0,nt=0;nt!=n;i++){
@@ -140,7 +159,7 @@ public:
                     }
                     cout<<input[i];
                 }
-                cout<<t<<endl;
+                cout<<s<<endl;
                 n++;
                 for(int i=0,nt=0;nt!=n;i++){
                     if(input[i]==' ' || input[i]==0){
@@ -150,14 +169,14 @@ public:
                 }
                 cout<<endl;
             }
-            if(t=="Det Nominal" || t=="Noun Nominal" || t=="ProperNoun" || t=="Preposition NP" || t=="Verb NP" || t=="Verb NP PP" || t=="Verb PP"){
+            if(t=="Det Nominal" || t=="Noun Nominal" || t=="ProperNoun" || t=="Preposition NP" || t=="Verb NP" || t=="Verb PP"){
                 for(int i=0,nt=0;nt!=n;i++){
                     if(input[i]==' '){
                         nt++;
                     }
                     cout<<input[i];
                 }
-                cout<<t<<endl;
+                cout<<s<<endl;
                 n++;
                 for(int i=0,nt=0;nt!=n;i++){
                     if(input[i]==' ' || input[i]==0){
@@ -165,9 +184,68 @@ public:
                     }
                     cout<<input[i];
                 }
-                t=WordCut(t);
-                cout<<t<<endl;
+                s=WordCut(s);
+                cout<<s<<endl;
             }
+            if(t=="Verb NP PP"){
+                for(int i=0,nt=0;nt!=n;i++){
+                    if(input[i]==' '){
+                        nt++;
+                    }
+                    cout<<input[i];
+                }
+                cout<<s<<endl;
+                n++;
+                for(int i=0,nt=0;nt!=n;i++){
+                    if(input[i]==' ' || input[i]==0){
+                        nt++;
+                    }
+                    cout<<input[i];
+                }
+                s=WordCut(s);
+                for(int i=0,nt=0;nt!=n;i++){
+                    if(input[i]==' ' || input[i]==0){
+                        nt++;
+                    }
+                    cout<<input[i];
+                }
+                s=WordCut(s);
+                cout<<s<<endl;
+            }
+            s=WordCut(s);
+        }
+    }
+
+    void Print2(){
+        if(V.empty()){
+            cout<<"Incorrect Structure"<<endl;
+            return;
+        }
+        string t,s;
+        int n=0;
+        while(!V.empty()){
+            s=V.back()+" "+s;
+            V.pop_back();
+            t=GetFirst(s);
+            for(int i=0,nt=0;nt!=n;i++){
+                if(input[i]==' ' || input[i]==0){
+                    nt++;
+                }
+                cout<<input[i];
+            }
+            cout<<s<<endl;
+            if(t=="Preposition" || t=="Noun" || t=="Verb" || t=="Det" || t=="Pronoun"){
+                n++;
+                s=WordCut(s);
+                for(int i=0,nt=0;nt!=n;i++){
+                    if(input[i]==' ' || input[i]==0){
+                        nt++;
+                    }
+                    cout<<input[i];
+                }
+                cout<<s<<endl;
+            }
+            s=WordCut(s);
         }
     }
 
@@ -336,7 +414,9 @@ public:
 int main(){
     Parser A;
     A.Parse();
-    A.Print();
+    //A.Force();
+    A.Vout();
+    A.Print2();
   return 0;
 }
 
