@@ -75,7 +75,7 @@ public:
         cout<<"Enter the sentence to parse\n";
         getline(cin,input); //get string from user
         nWords=NumOfWords(input);
-        DebugOut=0;
+        DebugOut=1;
         cWords=0;
         if(DebugOut){
             cout<<"Number of Words in string: "<<nWords<<endl; //debug
@@ -256,16 +256,6 @@ public:
         }
         V1.pop_back();cWords--;
 
-        V1.push_back("Verb");cWords++;
-        if(Verb(s)){
-            V.push_back("Verb");
-            if(DebugOut){
-                cout<<"Verb"<<endl;
-            }
-            return true;
-        }
-        V1.pop_back();cWords--;
-
         V1.push_back("Verb NP PP");cWords++;
         if(Verb(s) && NP(WordCut(s)) && PP(WordCut(WordCut(s)))){
             V.push_back("Verb NP PP");
@@ -281,6 +271,16 @@ public:
             V.push_back("Verb PP");
             if(DebugOut){
                 cout<<"Verb PP"<<endl; //debug
+            }
+            return true;
+        }
+        V1.pop_back();cWords--;
+
+        V1.push_back("Verb");cWords++;
+        if(Verb(s)){
+            V.push_back("Verb");
+            if(DebugOut){
+                cout<<"Verb"<<endl;
             }
             return true;
         }
