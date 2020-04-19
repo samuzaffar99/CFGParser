@@ -75,7 +75,7 @@ public:
         cout<<"Enter the sentence to parse\n";
         getline(cin,input); //get string from user
         nWords=NumOfWords(input);
-        DebugOut=1;
+        DebugOut=0;
         cWords=0;
         if(DebugOut){
             cout<<"Number of Words in string: "<<nWords<<endl; //debug
@@ -129,43 +129,11 @@ public:
 
     void Print(){
         V=V1;
-        if(V.empty()){
-            cout<<"Incorrect Structure"<<endl;
-            return;
-        }
-        string t,s;
-        int n=0;
-        while(!V.empty()){
-            s=V.back()+" "+s;
-            V.pop_back();
-            t=GetFirst(s);
-            for(int i=0,nt=0;nt!=n;i++){
-                if(input[i]==' ' || input[i]==0){
-                    nt++;
-                }
-                cout<<input[i];
-            }
-            cout<<s<<endl;
-            if(t=="Preposition" || t=="Noun" || t=="Verb" || t=="Det" || t=="Pronoun"){
-                n++;
-                s=WordCut(s);
-                for(int i=0,nt=0;nt!=n;i++){
-                    if(input[i]==' ' || input[i]==0){
-                        nt++;
-                    }
-                    cout<<input[i];
-                }
-                cout<<s<<endl;
-            }
-            s=WordCut(s);
-        }
-    }
-
-    void Print2(){
-        V=V1;
         int k=0;
         if(V.empty()|| cWords!=nWords){
-            cout<<nWords<<" "<<cWords<<endl; //debug
+            if(DebugOut){
+                cout<<nWords<<" "<<cWords<<endl; //debug
+            }
             cout<<"Incorrect Structure"<<endl;
             return;
         }
@@ -214,7 +182,7 @@ public:
     }
 
     bool NP(string s){
-        V1.push_back("Pronoun");
+        V1.push_back("Pronoun");cWords++;
         if(Pronoun(s)){
             V.push_back("Pronoun");
             if(DebugOut){
@@ -222,9 +190,9 @@ public:
             }
             return true;
         }
-        V1.pop_back();
+        V1.pop_back();cWords--;
 
-        V1.push_back("ProperNoun");
+        V1.push_back("ProperNoun");cWords++;
         if(ProperNoun(s)){
             V.push_back("ProperNoun");
             if(DebugOut){
@@ -232,9 +200,9 @@ public:
             }
             return true;
         }
-        V1.pop_back();
+        V1.pop_back();cWords--;
 
-        V1.push_back("Det Nominal");
+        V1.push_back("Det Nominal");cWords++;
         if(Det(s) && Nominal(WordCut(s))){
             V.push_back("Det Nominal");
             if(DebugOut){
@@ -242,7 +210,7 @@ public:
             }
             return true;
         }
-        V1.pop_back();
+        V1.pop_back();cWords--;
 
         if(DebugOut){
             cout<<"Failed NP"<<endl; //debug
@@ -251,7 +219,7 @@ public:
     }
 
     bool Nominal(string s){
-        V1.push_back("Noun Nominal");
+        V1.push_back("Noun Nominal");cWords++;
         if(Noun(s) && Nominal(WordCut(s))){
             V.push_back("Noun Nominal");
             if(DebugOut){
@@ -259,8 +227,9 @@ public:
             }
             return true;
         }
-        V1.pop_back();
-        V1.push_back("Noun");
+        V1.pop_back();cWords--;
+
+        V1.push_back("Noun");cWords++;
         if(Noun(s)){
             V.push_back("Noun");
             if(DebugOut){
@@ -268,7 +237,8 @@ public:
             }
             return true;
         }
-        V1.pop_back();
+        V1.pop_back();cWords--;
+
         if(DebugOut){
             cout<<"Failed Nominal"<<endl; //debug
         }
@@ -276,7 +246,7 @@ public:
     }
 
     bool VP(string s){
-        V1.push_back("Verb NP");
+        V1.push_back("Verb NP");cWords++;
         if(Verb(s) && NP(WordCut(s))){
             V.push_back("Verb NP");
             if(DebugOut){
@@ -284,9 +254,9 @@ public:
             }
             return true;
         }
-        V1.pop_back();
+        V1.pop_back();cWords--;
 
-        V1.push_back("Verb");
+        V1.push_back("Verb");cWords++;
         if(Verb(s)){
             V.push_back("Verb");
             if(DebugOut){
@@ -294,9 +264,9 @@ public:
             }
             return true;
         }
-        V1.pop_back();
+        V1.pop_back();cWords--;
 
-        V1.push_back("Verb NP PP");
+        V1.push_back("Verb NP PP");cWords++;
         if(Verb(s) && NP(WordCut(s)) && PP(WordCut(WordCut(s)))){
             V.push_back("Verb NP PP");
             if(DebugOut){
@@ -304,9 +274,9 @@ public:
             }
             return true;
         }
-        V1.pop_back();
+        V1.pop_back();cWords--;
 
-        V1.push_back("Verb PP");
+        V1.push_back("Verb PP");cWords++;
         if(Verb(s) && PP(WordCut(s))){
             V.push_back("Verb PP");
             if(DebugOut){
@@ -314,7 +284,7 @@ public:
             }
             return true;
         }
-        V1.pop_back();
+        V1.pop_back();cWords--;
 
         if(DebugOut){
             cout<<"Failed VP"<<endl; //debug
@@ -323,7 +293,7 @@ public:
     }
 
     bool PP(string s){
-        V1.push_back("Preposition NP");
+        V1.push_back("Preposition NP");cWords++;
         if(Preposition(s) && NP(WordCut(s))){
             V.push_back("Preposition NP");
             if(DebugOut){
@@ -331,7 +301,7 @@ public:
             }
             return true;
         }
-        V1.pop_back();
+        V1.pop_back();cWords--;
 
         if(DebugOut){
             cout<<"Failed PP"<<endl; //debug
@@ -342,7 +312,7 @@ public:
     bool Pronoun(string s){
         //V1.push_back("Pronoun");
         if(Finder(s,"pronouns.txt")){
-            cWords++;
+            //cWords++;
             return true;
         }
         //V1.pop_back();
@@ -352,7 +322,7 @@ public:
     bool Preposition(string s){
         //V1.push_back("Preposition");
         if(Finder(s,"prepositions.txt")){
-            cWords++;
+            //cWords++;
             return true;
         }
         //V1.pop_back();
@@ -363,7 +333,7 @@ public:
     bool Noun(string s){
         //V1.push_back("Noun");
         if(Finder(s,"nouns.txt")){
-            cWords++;
+            //cWords++;
             return true;
         }
         //V1.pop_back();
@@ -373,7 +343,7 @@ public:
     bool Verb(string s){
         //V1.push_back("Verb");
         if(Finder(s,"verbs.txt")){
-            cWords++;
+            //cWords++;
             return true;
         }
         //V1.pop_back();
@@ -383,7 +353,7 @@ public:
     bool Det(string s){
         //V1.push_back("Det");
         if(Finder(s,"determiners.txt")){
-            cWords++;
+            //cWords++;
             return true;
         }
         //V1.pop_back();
@@ -402,10 +372,6 @@ int main(){
     A.Parse();
     //A.Force();
     A.Vout();
-    //A.Print();
-    A.Print2();
+    A.Print();
   return 0;
 }
-
-
-
