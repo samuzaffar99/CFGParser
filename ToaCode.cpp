@@ -2,13 +2,11 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <list>
-#include <iterator>
 #include <cstring>
-#include <bits/stdc++.h>
 #include <vector>
+
 using namespace std;
-int gnWords=0;
+
 bool S(string s);
 bool NP(string s);
 bool VP(string s);
@@ -20,26 +18,7 @@ bool Noun(string s);
 bool PP(string s);
 bool Preposition(string s);
 bool ProperNoun(string s);
-void Replace(string s1);
-void Showlist(list <string> g);
-//list
-list <string> plist;
-list<string>::iterator itr;
-//end list
-void Showlist(list <string> g){
-    list <string> :: iterator it;
-    for(it = g.begin(); it != g.end(); ++it)
-        cout << *it<< " ";
-    cout <<endl;
-}
-void Replace(string s){
-	itr=plist.erase(itr);
-	//itr++;
-	//cout<<"New iterrotr"<<*itr<<endl;
-	plist.begin()=itr;
-	plist.insert(itr,s);
-	itr--;
-}
+
 int NumOfWords(string s){ //returns Number of Words in String
 	int num=1; //need to set this to 0 for empty case
 	for(int i=0;i<=strlen(s.c_str());i++){
@@ -49,8 +28,12 @@ int NumOfWords(string s){ //returns Number of Words in String
 	}
 	return num;
 }
+
 string WordCut(string s){ //removes first word from string
-    string s2=s.substr(s.find(" ")+1);
+    string s2;
+    if(NumOfWords(s)>1){
+        s2=s.substr(s.find(" ")+1);
+    }
     //cout<<s2<<endl; //debug
 	return s2;
 }
@@ -65,7 +48,7 @@ string GetFirst(string s){
     }
     return s2;
 }
-bool Finder(string s,string FN,string str){
+bool Finder(string s,string FN){
     ifstream F(FN);
     string s2;
     s=GetFirst(s);
@@ -73,10 +56,6 @@ bool Finder(string s,string FN,string str){
     while(!F.eof()){
         getline(F,s2);
         if(s2==s){
-//        	Replace(str);
-//			Showlist(plist);
-//            Replace(s2); //debug
-//            Showlist(plist);
             return true;
         }
     }
@@ -87,13 +66,14 @@ class Parser{
 string input; //input string
 int nWords; //Number of words
 vector<string> V;
+vector<string> V1;
 bool DebugOut;
 public:
     Parser(){
         cout<<"Enter the sentence to parse\n";
         getline(cin,input); //get string from user
         nWords=NumOfWords(input);
-        DebugOut=0;
+        DebugOut=1;
         if(DebugOut){
             cout<<"Number of Words in string: "<<nWords<<endl; //debug
         }
@@ -121,8 +101,8 @@ public:
 
     void Vout(){
         cout<<"Vector Contains: "<<endl;
-        for(int i=0;i<V.size();i++){
-            cout<<V.at(i)<<endl;
+        for(int i=0;i<V1.size();i++){
+            cout<<V1.at(i)<<endl;
         }
         cout<<endl;
     }
@@ -132,91 +112,8 @@ public:
             //insert
         }
     }
-    void Print(){
-        if(V.empty()){
-            cout<<"Incorrect Structure"<<endl;
-            return;
-        }
-        string t,s;
-        int n=0;
-        while(!V.empty()){
-            t=V.back();
-            s=t+" "+s;
-            V.pop_back();
-            if(t=="S" || t=="NP" || t=="VP" || t=="PP" || t=="Nominal" || t=="NP VP"){
-                for(int i=0,nt=0;nt!=n;i++){
-                    if(input[i]==' '){
-                        nt++;
-                    }
-                    cout<<input[i];
-                }
-                cout<<s<<endl;
-            }
-            if(t=="Preposition" || t=="Noun" || t=="Verb" || t=="Det" || t=="Pronoun"){
-                for(int i=0,nt=0;nt!=n;i++){
-                    if(input[i]==' '){
-                        nt++;
-                    }
-                    cout<<input[i];
-                }
-                cout<<s<<endl;
-                n++;
-                for(int i=0,nt=0;nt!=n;i++){
-                    if(input[i]==' ' || input[i]==0){
-                        nt++;
-                    }
-                    cout<<input[i];
-                }
-                cout<<endl;
-            }
-            if(t=="Det Nominal" || t=="Noun Nominal" || t=="ProperNoun" || t=="Preposition NP" || t=="Verb NP" || t=="Verb PP"){
-                for(int i=0,nt=0;nt!=n;i++){
-                    if(input[i]==' '){
-                        nt++;
-                    }
-                    cout<<input[i];
-                }
-                cout<<s<<endl;
-                n++;
-                for(int i=0,nt=0;nt!=n;i++){
-                    if(input[i]==' ' || input[i]==0){
-                        nt++;
-                    }
-                    cout<<input[i];
-                }
-                s=WordCut(s);
-                cout<<s<<endl;
-            }
-            if(t=="Verb NP PP"){
-                for(int i=0,nt=0;nt!=n;i++){
-                    if(input[i]==' '){
-                        nt++;
-                    }
-                    cout<<input[i];
-                }
-                cout<<s<<endl;
-                n++;
-                for(int i=0,nt=0;nt!=n;i++){
-                    if(input[i]==' ' || input[i]==0){
-                        nt++;
-                    }
-                    cout<<input[i];
-                }
-                s=WordCut(s);
-                for(int i=0,nt=0;nt!=n;i++){
-                    if(input[i]==' ' || input[i]==0){
-                        nt++;
-                    }
-                    cout<<input[i];
-                }
-                s=WordCut(s);
-                cout<<s<<endl;
-            }
-            s=WordCut(s);
-        }
-    }
 
-    void Print2(){
+    void Print(){
         if(V.empty()){
             cout<<"Incorrect Structure"<<endl;
             return;
@@ -250,27 +147,23 @@ public:
     }
 
     bool S(string s){
-//        plist.push_back("NP");
-//        plist.push_back("VP");
-//        itr=plist.begin();
-//        Showlist(plist);
-        if(NP(s)){
-//            itr++;
-            if(VP(WordCut(s))){
-                V.push_back("NP VP");
-                if(DebugOut){
-                    cout<<"NP VP"<<endl; //debug
-                }
-                return true;
+        V1.push_back("S");
+        if(NP(s) && VP(WordCut(s))){
+            V.push_back("NP VP");
+            if(DebugOut){
+                cout<<"NP VP"<<endl; //debug
             }
+            return true;
         }
         if(DebugOut){
             cout<<"Failed S"<<endl; //debug
         }
+        V1.pop_back();
         return false;
     }
 
     bool NP(string s){
+        V1.push_back("NP");
         if(Pronoun(s)){
             V.push_back("Pronoun");
             if(DebugOut){
@@ -278,44 +171,37 @@ public:
             }
             return true;
         }
-//        cout<<*itr<<endl;
-        if(ProperNoun(s)){
+        else if(ProperNoun(s)){
             V.push_back("ProperNoun");
             if(DebugOut){
                 cout<<"ProperNoun"<<endl; //debug
             }
             return true;
         }
-        if(Det(s)){
-//            cout<<"here\n"; //debug
-//            plist.push_back("Nominal");
-//            Showlist(plist);
-//            itr++;
-            if(Nominal(WordCut(s))){
-                V.push_back("Det Nominal");
-                if(DebugOut){
-                    cout<<"Det Nominal"<<endl; //debug
-                }
-                return true;
+        else if(Det(s) && Nominal(WordCut(s))){
+            V.push_back("Det Nominal");
+            if(DebugOut){
+                cout<<"Det Nominal"<<endl; //debug
             }
+            return true;
         }
         if(DebugOut){
             cout<<"Failed NP"<<endl; //debug
         }
+        V1.pop_back();
         return false;
     }
 
     bool Nominal(string s){
-        if(Noun(s)){
-            if(NumOfWords(s)>1){
-                if(Nominal(WordCut(s))){
-                    V.push_back("Noun Nominal");
-                    if(DebugOut){
-                        cout<<"Noun Nominal"<<endl; //debug
-                    }
-                    return true;
-                }
+        V1.push_back("Nominal");
+        if(Noun(s) && Nominal(WordCut(s))){
+            V.push_back("Noun Nominal");
+            if(DebugOut){
+                cout<<"Noun Nominal"<<endl; //debug
             }
+            return true;
+        }
+        else if(Noun(s)){
             V.push_back("Noun");
             if(DebugOut){
                 cout<<"Noun"<<endl; //debug
@@ -325,88 +211,111 @@ public:
         if(DebugOut){
             cout<<"Failed Nominal"<<endl; //debug
         }
+        V1.pop_back();
         return false;
     }
 
     bool VP(string s){
-//    	itr++;
-//    	Replace("Verb");
-//    	Showlist(plist);
-        if(Verb(s)){
-//                plist.push_back("NP");
-//                Showlist(plist);
-//                itr++;
-            if(NP(WordCut(s))){
-                if(PP(WordCut(WordCut(s)))){
-                    V.push_back("Verb NP PP");
-                    if(DebugOut){
-                        cout<<"Verb NP PP"<<endl; //debug
-                    }
-                    return true;
-                }
-                V.push_back("Verb NP");
-                if(DebugOut){
-                    cout<<"Verb NP"<<endl; //debug
-                }
-                return true;
+        V1.push_back("VP");
+        if(Verb(s) && NP(WordCut(s)) && PP(WordCut(WordCut(s)))){
+            V.push_back("Verb NP PP");
+            if(DebugOut){
+                cout<<"Verb NP PP"<<endl; //debug
             }
+            return true;
+        }
+        else if(Verb(s) && NP(WordCut(s))){
+            V.push_back("Verb NP");
+            if(DebugOut){
+                cout<<"Verb NP"<<endl; //debug
+            }
+            return true;
+        }
+        else if(Verb(s) && PP(WordCut(s))){
+            V.push_back("Verb PP");
+            if(DebugOut){
+                cout<<"Verb PP"<<endl; //debug
+            }
+            return true;
+        }
+        else if(Verb(s)){
             V.push_back("Verb");
             if(DebugOut){
                 cout<<"Verb"<<endl;
             }
             return true;
-            if(PP(WordCut(s))){
-                V.push_back("Verb PP");
-                if(DebugOut){
-                    cout<<"Verb PP"<<endl; //debug
-                }
-                return true;
-            }
-
         }
         if(DebugOut){
             cout<<"Failed VP"<<endl; //debug
         }
+        V1.pop_back();
         return false;
     }
 
     bool PP(string s){
-        if(Preposition(s)){
-            if(NP(WordCut(s))){
-                V.push_back("Preposition NP");
-                if(DebugOut){
-                    cout<<"Preposition NP"<<endl; //debug
-                }
-                return true;
+        V1.push_back("PP");
+        if(Preposition(s) && NP(WordCut(s))){
+            V.push_back("Preposition NP");
+            if(DebugOut){
+                cout<<"Preposition NP"<<endl; //debug
             }
+            return true;
         }
         if(DebugOut){
             cout<<"Failed PP"<<endl; //debug
         }
+        V1.pop_back();
         return false;
     }
 
     bool Pronoun(string s){
-        return Finder(s,"pronouns.txt","Pronoun");
+        V1.push_back("Pronoun");
+        if(Finder(s,"pronouns.txt")){
+            return true;
+        }
+        V1.pop_back();
+        return false;
     }
 
     bool Preposition(string s){
-        return Finder(s,"prepositions.txt","Preposition");
+        V1.push_back("Preposition");
+        if(Finder(s,"prepositions.txt")){
+            return true;
+        }
+        V1.pop_back();
+        return false;
     }
 
     bool Noun(string s){
-        return Finder(s,"nouns.txt","Noun");
+        V1.push_back("Noun");
+        if(Finder(s,"nouns.txt")){
+            return true;
+        }
+        V1.pop_back();
+        return false;
     }
 
     bool Verb(string s){
-        return Finder(s,"verbs.txt","Verb");
+        V1.push_back("Verb");
+        if(Finder(s,"verbs.txt")){
+            return true;
+        }
+        V1.pop_back();
+        return false;
     }
 
     bool Det(string s){
-        return Finder(s,"determiners.txt","Det");
+        V1.push_back("Det");
+        if(Finder(s,"determiners.txt")){
+            return true;
+        }
+        V1.pop_back();
+        return false;
     }
 
     bool ProperNoun(string s){
+        V1.push_back("ProperNoun");
+        V1.pop_back();
         return false;
     }
 };
@@ -416,7 +325,7 @@ int main(){
     A.Parse();
     //A.Force();
     A.Vout();
-    A.Print2();
+    A.Print();
   return 0;
 }
 
