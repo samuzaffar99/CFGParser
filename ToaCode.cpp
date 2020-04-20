@@ -122,7 +122,7 @@ public:
         int n=0;
         while(k!=V.size()){
             s=V.at(k)+" "+s;
-            //V.pop_back();
+
             t=GetFirst(s);
             for(int i=0,nt=0;nt!=n;i++){
                 if(input[i]==' ' || input[i]==0){
@@ -131,7 +131,7 @@ public:
                 cout<<input[i];
             }
             cout<<s<<endl;
-            if(t=="Preposition" || t=="Noun" || t=="Verb" || t=="Det" || t=="Pronoun"){
+            if(t=="Preposition" || t=="Noun" || t=="Verb" || t=="Det" || t=="Pronoun" || t=="ProperNoun"){
                 n++;
                 s=WordCut(s);
                 for(int i=0,nt=0;nt!=n;i++){
@@ -213,6 +213,8 @@ public:
 
     bool VP(string s){
         dout<<"Testing VP"<<endl; //debug
+        int tWords=cWords;
+        vector<string> Vt=V;
         V.push_back("Verb NP PP");cWords++;
         if(Verb(s) && NP(WordCut(s)) && PP(WordCut(WordCut(s)))){
             dout<<"Verb NP PP"<<endl; //debug
@@ -220,6 +222,11 @@ public:
             return true;
         }
         V.pop_back();cWords--;
+
+        while(cWords!=tWords){
+            V.pop_back();
+            cWords--;
+        }
 
         V.push_back("Verb NP");cWords++;
         if(Verb(s) && NP(WordCut(s))){
@@ -335,6 +342,7 @@ public:
         dout<<"Failed ProperNoun"<<endl; //debug
         return false;
     }
+
 };
 
 int main(){
@@ -343,6 +351,6 @@ int main(){
     //A.Force();
     A.Vout();
     A.Print();
-    A.PrintDebug();
+    //A.PrintDebug();
   return 0;
 }
