@@ -67,9 +67,10 @@ public:
 
     bool Parse(){
         if(input!=""){
+            dout<<"Testing Parse"<<endl; //debug
             V.push_back("S");
             if(S(input)){
-                dout<<"S"<<endl; //debug
+                dout<<"Succeeded Parse"<<endl; //debug
                 return true;
             }
             dout<<"Failed Parse"<<endl; //debug
@@ -156,7 +157,6 @@ public:
         dout<<"Testing S"<<endl; //debug
         V.push_back("NP VP");
         if(NP(s) && VP(WordCut(s))){
-            dout<<"NP VP"<<endl; //debug
             dout<<"Succeeded S"<<endl; //debug
             return true;
         }
@@ -169,7 +169,6 @@ public:
         dout<<"Testing NP"<<endl; //debug
         V.push_back("Pronoun");cWords++;
         if(Pronoun(s)){
-            dout<<"Pronoun"<<endl; //debug
             dout<<"Succeeded NP"<<endl; //debug
             return true;
         }
@@ -177,7 +176,6 @@ public:
 
         V.push_back("ProperNoun");cWords++;
         if(ProperNoun(s)){
-            dout<<"ProperNoun"<<endl; //debug
             dout<<"Succeeded NP"<<endl; //debug
             return true;
         }
@@ -185,7 +183,6 @@ public:
 
         V.push_back("Det Nominal");cWords++;
         if(Det(s) && Nominal(WordCut(s))){
-            dout<<"Det Nominal"<<endl; //debug
             dout<<"Succeeded NP"<<endl; //debug
             return true;
         }
@@ -199,7 +196,6 @@ public:
         dout<<"Testing Nominal"<<endl; //debug
         V.push_back("Noun Nominal");cWords++;
         if(Noun(s) && Nominal(WordCut(s))){
-            dout<<"Noun Nominal"<<endl; //debug
             dout<<"Succeeded Nominal"<<endl; //debug
             return true;
         }
@@ -207,7 +203,6 @@ public:
 
         V.push_back("Noun");cWords++;
         if(Noun(s)){
-            dout<<"Noun"<<endl; //debug
             dout<<"Succeeded Nominal"<<endl; //debug
             return true;
         }
@@ -223,7 +218,6 @@ public:
         vector<string> Vt=V;
         V.push_back("Verb NP PP");cWords++;
         if(Verb(s) && NP(WordCut(s)) && PP(WordCut(WordCut(s)))){
-            dout<<"Verb NP PP"<<endl; //debug
             dout<<"Succeeded VP"<<endl; //debug
             return true;
         }
@@ -237,7 +231,6 @@ public:
 
         V.push_back("Verb NP");cWords++;
         if(Verb(s) && NP(WordCut(s))){
-            dout<<"Verb NP"<<endl; //debug
             dout<<"Succeeded VP"<<endl; //debug
             return true;
         }
@@ -249,7 +242,6 @@ public:
 
         V.push_back("Verb PP");cWords++;
         if(Verb(s) && PP(WordCut(s))){
-            dout<<"Verb PP"<<endl; //debug
             dout<<"Succeeded VP"<<endl; //debug
             return true;
         }
@@ -261,7 +253,6 @@ public:
 
         V.push_back("Verb");cWords++;
         if(Verb(s)){
-            dout<<"Verb"<<endl;
             dout<<"Succeeded VP"<<endl; //debug
             return true;
         }
@@ -275,7 +266,6 @@ public:
         dout<<"Testing PP"<<endl; //debug
         V.push_back("Preposition NP");cWords++;
         if(Preposition(s) && NP(WordCut(s))){
-            dout<<"Preposition NP"<<endl; //debug
             dout<<"Succeeded PP"<<endl; //debug
             return true;
         }
@@ -348,7 +338,6 @@ public:
     bool ProperNoun(string s){
         dout<<"Testing ProperNoun"<<endl; //debug
         if(s[0]>='A' && s[0]<='Z'){
-            cout<<"Proper Noun is: "<<s<<endl;
             //cWords++;
             dout<<"Succeeded ProperNoun"<<endl; //debug
             dout<<GetFirst(s)<<" is a ProperNoun"<<endl; //debug
@@ -366,6 +355,6 @@ int main(){
     //A.Force();
     A.Vout();
     A.Print();
-    //A.PrintDebug();
-  return 0;
+    A.PrintDebug();
+    return 0;
 }
