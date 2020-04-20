@@ -48,20 +48,7 @@ string GetFirst(string s){
     }
     return s2;
 }
-bool Finder(string s,string FN){
-    ifstream F(FN);
-    string s2;
-    s=GetFirst(s);
-    cout<<"String to Find: "<<s<<endl; //debug
-    while(!F.eof()){
-        getline(F,s2);
-        if(s2==s){
-            cout<<"String Found: "<<s<<endl; //debug
-            return true;
-        }
-    }
-    return false;
-}
+
 
 class Parser{
 string input; //input string
@@ -91,9 +78,11 @@ public:
         }
         return false;
     }
+
     void PrintDebug(){
         cout<<dout.str()<<endl;
     }
+
     void Force(){
         V.push_back("S");
         V.push_back("NP VP");
@@ -123,8 +112,6 @@ public:
         int n=0;
         while(k!=V.size()){
             s=V.at(k)+" "+s;
-
-            t=GetFirst(s);
             for(int i=0,nt=0;nt!=n;i++){
                 if(input[i]==' ' || input[i]==0){
                     nt++;
@@ -132,6 +119,8 @@ public:
                 cout<<input[i];
             }
             cout<<s<<endl;
+
+            t=GetFirst(s);
             if(t=="Preposition" || t=="Noun" || t=="Verb" || t=="Det" || t=="Pronoun" || t=="ProperNoun"){
                 n++;
                 s=WordCut(s);
@@ -147,6 +136,22 @@ public:
             k++;
         }
     }
+
+    bool Finder(string s,string FN){
+        ifstream F(FN);
+        string s2;
+        s=GetFirst(s);
+        dout<<"String to Find: "<<s<<endl; //debug
+        while(!F.eof()){
+            getline(F,s2);
+            if(s2==s){
+                dout<<"String Found: "<<s<<endl; //debug
+                return true;
+            }
+        }
+        return false;
+    }
+
     bool S(string s){
         dout<<"Testing S"<<endl; //debug
         V.push_back("NP VP");
@@ -229,6 +234,7 @@ public:
             cWords--;
         }
 
+
         V.push_back("Verb NP");cWords++;
         if(Verb(s) && NP(WordCut(s))){
             dout<<"Verb NP"<<endl; //debug
@@ -236,6 +242,10 @@ public:
             return true;
         }
         V.pop_back();cWords--;
+        while(cWords!=tWords){
+            V.pop_back();
+            cWords--;
+        }
 
         V.push_back("Verb PP");cWords++;
         if(Verb(s) && PP(WordCut(s))){
@@ -244,6 +254,10 @@ public:
             return true;
         }
         V.pop_back();cWords--;
+        while(cWords!=tWords){
+            V.pop_back();
+            cWords--;
+        }
 
         V.push_back("Verb");cWords++;
         if(Verb(s)){
