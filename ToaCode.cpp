@@ -213,17 +213,17 @@ public:
 
     bool VP(string s){
         dout<<"Testing VP"<<endl; //debug
-        V.push_back("Verb NP");cWords++;
-        if(Verb(s) && NP(WordCut(s))){
-            dout<<"Verb NP"<<endl; //debug
+        V.push_back("Verb NP PP");cWords++;
+        if(Verb(s) && NP(WordCut(s)) && PP(WordCut(WordCut(s)))){
+            dout<<"Verb NP PP"<<endl; //debug
             dout<<"Succeeded VP"<<endl; //debug
             return true;
         }
         V.pop_back();cWords--;
 
-        V.push_back("Verb NP PP");cWords++;
-        if(Verb(s) && NP(WordCut(s)) && PP(WordCut(WordCut(s)))){
-            dout<<"Verb NP PP"<<endl; //debug
+        V.push_back("Verb NP");cWords++;
+        if(Verb(s) && NP(WordCut(s))){
+            dout<<"Verb NP"<<endl; //debug
             dout<<"Succeeded VP"<<endl; //debug
             return true;
         }
@@ -268,6 +268,7 @@ public:
         if(Finder(s,"pronouns.txt")){
             //cWords++;
             dout<<"Succeeded Pronoun"<<endl; //debug
+            dout<<GetFirst(s)<<" is a Pronoun"<<endl; //debug
             return true;
         }
         dout<<"Failed Pronoun"<<endl; //debug
@@ -279,6 +280,7 @@ public:
         if(Finder(s,"prepositions.txt")){
             //cWords++;
             dout<<"Succeeded ProperNoun"<<endl; //debug
+            dout<<GetFirst(s)<<" is a Preposition"<<endl; //debug
             return true;
         }
         dout<<"Failed Preposition"<<endl; //debug
@@ -290,6 +292,7 @@ public:
         if(Finder(s,"nouns.txt")){
             //cWords++;
             dout<<"Succeeded Noun"<<endl; //debug
+            dout<<GetFirst(s)<<" is a Noun"<<endl; //debug
             return true;
         }
         dout<<"Noun"<<endl; //debug
@@ -301,6 +304,7 @@ public:
         if(Finder(s,"verbs.txt")){
             //cWords++;
             dout<<"Succeeded Verb"<<endl; //debug
+            dout<<GetFirst(s)<<" is a Verb"<<endl; //debug
             return true;
         }
         dout<<"Failed Verb"<<endl; //debug
@@ -312,6 +316,7 @@ public:
         if(Finder(s,"determiners.txt")){
             //cWords++;
             dout<<"Succeeded Det"<<endl; //debug
+            dout<<GetFirst(s)<<" is a Det"<<endl; //debug
             return true;
         }
         dout<<"Failed Det"<<endl; //debug
@@ -324,6 +329,7 @@ public:
             cout<<"Proper Noun is: "<<s<<endl;
             //cWords++;
             dout<<"Succeeded ProperNoun"<<endl; //debug
+            dout<<GetFirst(s)<<" is a ProperNoun"<<endl; //debug
             return true;
         }
         dout<<"Failed ProperNoun"<<endl; //debug
