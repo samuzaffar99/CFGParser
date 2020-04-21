@@ -154,6 +154,9 @@ public:
     }
 
     bool S(string s){
+        if(s==""){
+            return false;
+        }
         dout<<"Testing S"<<endl; //debug
         V.push_back("NP VP");
         if(NP(s) && VP(WordCut(s))){
@@ -166,6 +169,9 @@ public:
     }
 
     bool NP(string s){
+        if(s==""){
+            return false;
+        }
         dout<<"Testing NP"<<endl; //debug
         int tWords=cWords;
         V.push_back("Pronoun");
@@ -194,6 +200,9 @@ public:
     }
 
     bool Nominal(string s){
+        if(s==""){
+            return false;
+        }
         dout<<"Testing Nominal"<<endl; //debug
         vector<string> Vt=V;
         int tWords=cWords;
@@ -217,6 +226,9 @@ public:
     }
 
     bool VP(string s){
+        if(s==""){
+            return false;
+        }
         dout<<"Testing VP"<<endl; //debug
         int tWords=cWords;
         vector<string> Vt=V;
@@ -253,6 +265,9 @@ public:
     }
 
     bool PP(string s){
+        if(s==""){
+            return false;
+        }
         dout<<"Testing PP"<<endl; //debug
         V.push_back("Preposition NP");
         if(Preposition(s) && NP(WordCut(s))){
