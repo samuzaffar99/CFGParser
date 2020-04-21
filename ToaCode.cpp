@@ -177,6 +177,7 @@ public:
             return false;
         }
         dout<<"Testing NP"<<endl; //debug
+        vector<string> Vt=V;
         int tWords=cWords;
 
         V.push_back("Det Nominal");
@@ -184,7 +185,7 @@ public:
             dout<<"Succeeded NP"<<endl; //debug
             return true;
         }
-        V.pop_back();
+        V=Vt;cWords=tWords;
 
         V.push_back("Pronoun");
         if(Pronoun(s)){
