@@ -29,10 +29,14 @@ int NumOfWords(string s){ //returns Number of Words in String
 	return num;
 }
 
-string WordCut(string s){ //removes first word from string
+string WordCut(string s, int i=1){ //removes first word from string
     string s2;
     if(NumOfWords(s)>1){
         s2=s.substr(s.find(" ")+1);
+    }
+    while(i>1){
+        s2=s2.substr(s2.find(" ")+1);
+        i--;
     }
     //cout<<s2<<endl; //debug
 	return s2;
@@ -159,7 +163,7 @@ public:
         }
         dout<<"Testing S"<<endl; //debug
         V.push_back("NP VP");
-        if(NP(s) && VP(WordCut(s))){
+        if(NP(s) && VP(WordCut(s,cWords))){
             dout<<"Succeeded S"<<endl; //debug
             return true;
         }
@@ -174,6 +178,14 @@ public:
         }
         dout<<"Testing NP"<<endl; //debug
         int tWords=cWords;
+
+        V.push_back("Det Nominal");
+        if(Det(s) && Nominal(WordCut(s))){
+            dout<<"Succeeded NP"<<endl; //debug
+            return true;
+        }
+        V.pop_back();
+
         V.push_back("Pronoun");
         if(Pronoun(s)){
             dout<<"Succeeded NP"<<endl; //debug
@@ -188,12 +200,7 @@ public:
         }
         V.pop_back();
 
-        V.push_back("Det Nominal");
-        if(Det(s) && Nominal(WordCut(s))){
-            dout<<"Succeeded NP"<<endl; //debug
-            return true;
-        }
-        V.pop_back();
+
 
         dout<<"Failed NP"<<endl; //debug
         return false;
