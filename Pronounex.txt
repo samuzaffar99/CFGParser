@@ -1,0 +1,46 @@
+pronoun verb|each analyze
+
+VERB NP
+pronoun verb pronoun|few appear all
+pronoun verb propernoun|none annoy Sam
+pronoun verb det noun|all apologise all ATM
+pronoun verb det noun noun|anything argue many abundance CD
+pronoun verb det noun noun noun|anything argue many abundance CD CD
+
+VERB NP PP
+pronoun verb pronoun prep pronoun|either applaud herself amid everyone
+pronoun verb pronoun prep propernoun|either applaud herself amid Rahim
+pronoun verb pronoun prep det noun|either applaud herself amid much abundance
+pronoun verb pronoun prep det noun noun|either applaud herself amid much abundance absence
+pronoun verb pronoun prep det noun noun|either applaud herself amid much abundance absence acetate
+
+pronoun verb propernoun prep pronoun|you admire Ahmed in it
+pronoun verb propernoun prep propernoun|you admire Ahmed in California
+pronoun verb propernoun prep det noun|you annoy Ahmed in all appearance
+pronoun verb propernoun prep det noun noun|you annoy Ahmed in all appearance ability
+pronoun verb propernoun prep det noun noun noun|you annoy Ahmed in all appearance ability abuse
+
+pronoun verb det noun prep pronoun|you annoy each activist in it
+pronoun verb det noun prep propernoun|you annoy each activist in Karachi
+pronoun verb det noun prep det noun|i annoy each activist in most adulthood
+pronoun verb det noun prep det noun noun|i annoy each activist in most adulthood ATM
+pronoun verb det noun prep det noun noun noun|i annoy each activist in most adulthood ATM CD
+
+pronoun verb det noun noun prep pronoun|you annoy each abortion activist in it
+pronoun verb det noun noun prep propernoun|you annoy each abortion activist in Karachi
+pronoun verb det noun noun prep det noun|you annoy each abortion activist in most adulthood
+pronoun verb det noun noun prep det noun noun|you annoy each abortion activist in most adulthood ATM
+pronoun verb det noun noun prep det noun noun noun|you annoy each abortion activist in most adulthood ATM CD
+
+pronoun verb det noun noun noun prep pronoun|that accept all addition addiction admission alongst itself
+pronoun verb det noun noun noun prep propernoun|that accept all addition addiction admission alongst Africa
+pronoun verb det noun noun noun prep det noun|that accept all addition addiction admission alongst your aggression
+pronoun verb det noun noun noun prep det noun noun|that accept all addition addiction admission alongst your aggression accommodation
+pronoun verb det noun noun noun prep det noun noun noun|that accept all addition addiction admission alongst your aggression accommodation accusation
+
+VERB PP
+pronoun verb prep pronoun|which broke beneath itself
+pronoun verb prep propernoun|which broke beneath Haroon
+pronoun verb prep det noun|which broke beneath an adaptation
+pronoun verb prep det noun noun|which broke beneath an adaptation agreement
+pronoun verb prep det noun noun noun|which broke beneath an adaptation agreement airbag

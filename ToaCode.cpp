@@ -161,11 +161,39 @@ public:
         if(s==""){
             return false;
         }
+
+        int tWords=cWords;
         dout<<"Testing S"<<endl; //debug
         V.push_back("NP VP");
-        if(NP(s) && VP(WordCut(s,cWords))){
+        vector<string> Vt=V;
+        if(NP(s) && VP(WordCut(s,cWords)) && cWords==nWords){
             dout<<"Succeeded S"<<endl; //debug
             return true;
+        }
+        V=Vt;cWords=tWords;
+        cout<<"String is: "<<s<<endl;
+        cout<<"cWords: "<<cWords<<endl;
+        Vout();
+        if(NP(s)){
+            Vt=V;
+            int i=1;
+            while(cWords>0){
+                V=Vt;
+                cWords--;
+                for(int t=i;t>0;t--){
+                    V.pop_back();
+                }
+                i++;
+                V.pop_back();
+                V.push_back("Noun");
+                if(cWords==1 && V.back()=="Noun"){
+                    break;
+                }
+                if(VP(WordCut(s,cWords))){
+                    dout<<"Succeeded S"<<endl; //debug
+                    return true;
+                }
+            }
         }
         V.pop_back();
         dout<<"Failed S"<<endl; //debug
@@ -241,7 +269,7 @@ public:
         int tWords=cWords;
         vector<string> Vt=V;
         V.push_back("Verb NP PP");
-        if(Verb(s) && NP(WordCut(s)) && PP(WordCut(WordCut(s)))){
+        if(Verb(s) && NP(WordCut(s)) && PP(WordCut(s,cWords-tWords))){
             dout<<"Succeeded VP"<<endl; //debug
             return true;
         }
@@ -369,11 +397,13 @@ public:
 };
 
 int main(){
-    Parser A;
-    A.Parse();
-    //A.Force();
-    A.Vout();
-    A.Print();
-    A.PrintDebug();
+    while(1){
+        Parser A;
+        A.Parse();
+        //A.Force();
+        A.Vout();
+        A.Print();
+        //A.PrintDebug();
+    }
     return 0;
 }
