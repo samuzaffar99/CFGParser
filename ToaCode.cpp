@@ -241,7 +241,7 @@ public:
         int tWords=cWords;
         vector<string> Vt=V;
         V.push_back("Verb NP PP");
-        if(Verb(s) && NP(WordCut(s)) && PP(WordCut(WordCut(s)))){
+        if(Verb(s) && NP(WordCut(s)) && PP(WordCut(s,cWords-tWords))){
             dout<<"Succeeded VP"<<endl; //debug
             return true;
         }
@@ -369,11 +369,13 @@ public:
 };
 
 int main(){
-    Parser A;
-    A.Parse();
-    //A.Force();
-    A.Vout();
-    A.Print();
-    A.PrintDebug();
+    while(1){
+        Parser A;
+        A.Parse();
+        //A.Force();
+        A.Vout();
+        A.Print();
+        //A.PrintDebug();
+    }
     return 0;
 }
