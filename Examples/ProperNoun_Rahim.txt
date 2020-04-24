@@ -1,0 +1,51 @@
+ProperNoun Verb | We argue
+ProperNoun Verb Pronoun | Robert beat me
+ProperNoun Verb ProperNoun | Betty ate Steak
+ProperNoun Verb Det Noun+ | Abdullah bit my ape+
+ProperNoun Verb Preposition Pronoun | Ahmed drove to her
+ProperNoun Verb Preposition ProperNoun | Saad met near Boston
+ProperNoun Verb Preposition Det Noun+ | Shaykh breed unlike my ATM+
+
+ProperNoun Verb | She broke
+
+ProperNoun Verb Pronoun | Martin appreciate me
+ProperNoun Verb ProperNoun | Chris arise Waylon
+ProperNoun Verb Det Noun | Chelsea annoy her CD
+ProperNoun Verb Det Noun Noun | Shela blush many archer army
+ProperNoun Verb Det Noun Noun Noun | Shela blush many archer army army
+
+ProperNoun Verb Pronoun Preposition Pronoun | Shippy bake it but somebody
+ProperNoun Verb Pronoun Preposition ProperNoun | Shippy accept few but Hermy
+ProperNoun Verb Pronoun Preposition Det Noun | Shippy accept few across a accent
+ProperNoun Verb Pronoun Preposition Det Noun Noun | Shippy accept few across a accent accent
+ProperNoun Verb Pronoun Preposition Det Noun Noun | Shippy accept few across a accent accent abuse
+
+ProperNoun Verb ProperNoun Preposition Pronoun | Osama bomb Twintowers above everybody
+ProperNoun Verb ProperNoun Preposition ProperNoun | Osama bomb Twintowers above Obama
+ProperNoun Verb ProperNoun Preposition Det Noun | Osama bomb Twintowers above a airforce
+ProperNoun Verb ProperNoun Preposition Det Noun Noun | Osama bomb Twintowers above a airforce airforce
+ProperNoun Verb ProperNoun Preposition Det Noun Noun Noun | Osama bomb Twintowers above a airforce airforce airforce
+
+ProperNoun Verb Det Noun Preposition Pronoun | Abdullah arise your abortion ablow both
+ProperNoun Verb Det Noun Preposition ProperNoun | Abdullah arise your abortion ablow Ahmed
+ProperNoun Verb Det Noun Preposition Det Noun | Abdullah arise your abortion ablow a ATM
+ProperNoun Verb Det Noun Preposition Det Noun Noun | Abdullah arise your abortion ablow a ATM ATM
+ProperNoun Verb Det Noun Preposition Det Noun Noun Noun | Abdullah arise your abortion ablow a ATM ATM ATM
+
+ProperNoun Verb Det Noun Noun Preposition Pronoun | Shaykh accept a ATM account but nobody
+ProperNoun Verb Det Noun Noun Preposition ProperNoun | Shaykh accept a ATM account but Ahmedi
+ProperNoun Verb Det Noun Noun Preposition Det Noun | Shaykh accept a ATM account but all absence
+ProperNoun Verb Det Noun Noun Preposition Det Noun Noun | Shaykh accept a ATM account but all absence CD
+ProperNoun Verb Det Noun Noun Preposition Det Noun Noun Noun | Shaykh accept a ATM account but all absence CD accent
+
+ProperNoun Verb Det Noun Noun Noun Preposition Pronoun | Bob bend a TV abbey absence across all
+ProperNoun Verb Det Noun Noun Noun Preposition ProperNoun | Bob bend a TV abbey absence across Billy
+ProperNoun Verb Det Noun Noun Noun Preposition Det Noun | Bob bend a TV abbey absence across each abdomen
+ProperNoun Verb Det Noun Noun Noun Preposition Det Noun Noun | Bob bend a TV abbey absence across each abdomen abuse
+ProperNoun Verb Det Noun Noun Noun Preposition Det Noun Noun Noun | Bob bend a TV abbey absence across each abdomen abuse actor
+
+ProperNoun Verb Preposition Pronoun | Bill awoke across all
+ProperNoun Verb Preposition ProperNoun | Bill awoke across Biki
+ProperNoun Verb Preposition Det Noun | Bill awoke across half arm
+ProperNoun Verb Preposition Det Noun Noun | Bill awoke across half arm accent
+ProperNoun Verb Preposition Det Noun Noun Noun | Bill awoke across half arm accent adverb

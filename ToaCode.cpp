@@ -1,7 +1,6 @@
 #include <algorithm> //vv  nice Abdullah
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <cstring>
 #include <vector>
 #include <sstream>
@@ -397,13 +396,22 @@ public:
 };
 
 int main(){
+    char opt;
     while(1){
         Parser A;
         A.Parse();
         //A.Force();
-        A.Vout();
+        //A.Vout();
         A.Print();
         //A.PrintDebug();
+        cout<<"Press 0 to exit, any other key to continue.."<<endl;
+        cin>>opt;
+        if(opt=='0'){
+            break;
+        }
+        system("cls");
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
     }
     return 0;
 }
