@@ -170,9 +170,6 @@ public:
             return true;
         }
         V=Vt;cWords=tWords;
-        cout<<"String is: "<<s<<endl;
-        cout<<"cWords: "<<cWords<<endl;
-        Vout();
         if(NP(s)){
             Vt=V;
             int i=1;
